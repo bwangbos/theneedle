@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Election Probability Needle</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f0f0;
+        }
+        .gauge {
+            position: relative;
+            width: 300px;
+            height: 150px;
+            margin: 50px auto;
+            background: linear-gradient(to right, #d9534f, #5bc0de);
+            border-radius: 150px 150px 0 0;
+            overflow: hidden;
+        }
+        .needle {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            height: 150px;
+            background: #333;
+            transform-origin: bottom center;
+            transition: transform 0.5s ease-out;
+        }
+        .candidate-labels {
+            display: flex;
+            justify-content: space-between;
+            margin: 0 60px;
+            font-size: 1.2em;
+        }
+        .probability {
+            margin-top: 20px;
+            font-size: 2em;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Election Probability Needle</h1>
+    <div class="gauge">
+        <div class="needle" id="needle"></div>
+    </div>
+    <div class="candidate-labels">
+        <span>Trump</span>
+        <span>Harris</span>
+    </div>
+    <div class="probability" id="probability">50%</div>
+
+    <script>
+        function updateNeedle() {
+            // Generate a random probability between 0 and 100
+            let probability = Math.random() * 100;
+            // Update the needle rotation
+            let needle = document.getElementById('needle');
+            let rotation = (probability - 50) * 1.8; // Scale to -90 to 90 degrees
+            needle.style.transform = 'rotate(' + rotation + 'deg)';
+            // Update the probability display
+            document.getElementById('probability').innerText = probability.toFixed(1) + '%';
+        }
+        // Update the needle every second
+        setInterval(updateNeedle, 1000);
+        // Initialize
+        updateNeedle();
+    </script>
+
+</body>
+</html>
